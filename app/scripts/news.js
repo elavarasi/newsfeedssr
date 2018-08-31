@@ -19,6 +19,9 @@
                 case "asia":
                     url = "https://elanewsfeedserver.herokuapp.com/api/asia";
                     break;
+                default:
+                    url = "https://elanewsfeedserver.herokuapp.com/api/us";
+                    break;
             }
 
             fetch(proxyurl + url, {     
@@ -33,7 +36,6 @@
                 const newscontent = document.getElementById('newscontent');
                 const news = result[0].news;    
                 const newslist = document.createElement("ul");
-                // const newslist = document.getElementById("newslist");
                 
                 for(let i=0; i < news.length; i++) {
                     const eachNews = document.createElement("li");
