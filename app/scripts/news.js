@@ -4,7 +4,6 @@
         const asia = document.getElementById('asia');
 
         function shownews() {
-            const proxyurl = "https://cors-anywhere.herokuapp.com/";
             let url;
             switch(this.id) {
                 case "us":
@@ -24,11 +23,7 @@
                     break;
             }
 
-            fetch(proxyurl + url, {     
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
-            })
+            fetch(url)
             .then((response) => {
                 return response.json();
             })
