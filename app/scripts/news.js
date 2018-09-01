@@ -1,25 +1,27 @@
         const us = document.getElementById('us');
-        const europe = document.getElementById('europe');
-        const middleeast = document.getElementById('middleeast');
-        const asia = document.getElementById('asia');
+        const gb = document.getElementById('gb');
+        const au = document.getElementById('au');
+        const fr = document.getElementById('fr');
+        const jp = document.getElementById('jp');
+        const cn = document.getElementById('cn');
 
         function shownews() {
-            let url;
+            let url = "https://elanewsfeedserver.herokuapp.com/news/us";
             switch(this.id) {
-                case "us":
-                    url = "https://elanewsfeedserver.herokuapp.com/api/us";
+                case "au":
+                    url = "https://elanewsfeedserver.herokuapp.com/news/au";
                     break;
-                case "europe":
-                    url = "https://elanewsfeedserver.herokuapp.com/api/europe";
+                case "gb":
+                    url = "https://elanewsfeedserver.herokuapp.com/news/gb";
                     break;
-                case "middleeast":
-                    url = "https://elanewsfeedserver.herokuapp.com/api/middleeast";
+                case "fr":
+                    url = "https://elanewsfeedserver.herokuapp.com/news/fr";
                     break;
-                case "asia":
-                    url = "https://elanewsfeedserver.herokuapp.com/api/asia";
+                case "jp":
+                    url = "https://elanewsfeedserver.herokuapp.com/news/jp";
                     break;
-                default:
-                    url = "https://elanewsfeedserver.herokuapp.com/api/us";
+                case "cn":
+                    url = "https://elanewsfeedserver.herokuapp.com/news/cn";
                     break;
             }
 
@@ -28,13 +30,19 @@
                 return response.json();
             })
             .then((result) => {
-                const newscontent = document.getElementById('newscontent');
                 const news = result[0].news;    
-                const newslist = document.createElement("ul");
+
+                const newscontent = document.getElementById('newscontent');
+                while (newscontent.firstChild) newscontent.removeChild(newscontent.firstChild);
                 
+                const newslist = document.createElement("ul");            
                 for(let i=0; i < news.length; i++) {
                     const eachNews = document.createElement("li");
-                    eachNews.textContent = news[i];
+                    const newslink = document.createElement("a");                
+                    newslink.setAttribute("href", news[i]["url"]);   
+                    newslink.setAttribute("id", i);                                    
+                    newslink.textContent = news[i].title;
+                    eachNews.appendChild(newslink); 
                     newslist.appendChild(eachNews);    
                 }
                 newscontent.appendChild(newslist);
@@ -47,9 +55,9 @@
         }
 
         us.addEventListener("click", shownews, false);
-        europe.addEventListener("click", shownews, false);
-        middleeast.addEventListener("click", shownews, false);
-        asia.addEventListener("click", shownews, false);
-
-
+        gb.addEventListener("click", shownews, false);
+        jp.addEventListener("click", shownews, false);
+        cn.addEventListener("click", shownews, false);
+        fr.addEventListener("click", shownews, false);
+        au.addEventListener("click", shownews, false);
 
